@@ -48,10 +48,17 @@ public class DemoApplication extends AbstractVerticle {
 
     if(body == null) {
       response.setStatusCode(400).end();
-    } else {
-      repository.save(body.mapTo(Customer.class));
-      response.end();
-    }
+	} else {
+	  Customer c = body.mapTo(Customer.class);
+	  Optional<Customer> customer = repository.findById(Integer.valueOf(c.getId()));
+
+	  if (!customer.isPresent()) {
+	    repository.save(c);
+	    response.end();
+	  } else {
+	    response.setStatusCode(400).end();
+	  }
+	}
   }
 
   private void handleGetCustomer(RoutingContext routingContext) {

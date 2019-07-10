@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class CustomerRepository {
-  private Integer ID = 0;
+  private Integer ID = 1;
   private List<Customer> customers;
 
   public CustomerRepository() {
@@ -13,15 +13,16 @@ public class CustomerRepository {
   }
 
   public Customer save(Customer customer) {
-    if(customer.getId() != null) {
+    if(customer.getId() != null && customer.getId() != 0) {
       Optional<Customer> e = findById(customer.getId());
       if (e.isPresent()) {
         int idx = customers.indexOf(e.get());
-        customers.add(idx, customer);
+        customers.set(idx, customer);
       }
-    }
-    customer.setId(ID++);
-    customers.add(customer);
+    } else {
+		customer.setId(ID++);
+		customers.add(customer);
+	}
     return customer;
   }
 

@@ -1,0 +1,47 @@
+#
+# REST Client for VS Code
+# https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+#
+####################################
+
+@host = http://localhost:8080
+
+###
+
+POST {{host}}/customers HTTP/1.1
+Content-Type: application/json
+
+{
+	"id": 0,
+	"firstName": "Somchai",
+	"lastName": "Jaidee",
+	"age": 20,
+	"email": "somchai.jaidee@mail.com"
+}
+
+###
+
+GET {{host}}/customers HTTP/1.1
+
+###
+
+GET {{host}}/customers/2 HTTP/1.1
+
+###
+
+PUT {{host}}/customers/2 HTTP/1.1
+Content-Type: application/json
+
+{
+	"id": 2,
+	"firstName": "John",
+	"lastName": "Doe",
+	"age": 30,
+	"email": "john.doe@mail.com"
+}
+
+###
+
+DELETE {{host}}/customers/3 HTTP/1.1
+
+###
